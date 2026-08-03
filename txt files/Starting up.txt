@@ -1,0 +1,17 @@
+# Going to correct directory/file
+
+C:\Users\stan_>cd ..
+C:\Users> cd..
+C:\>cd projects 		#get to projects folder under C Drive
+C:\projects>cd opal-patronage-analysis		#access the actual folder for project
+
+#it will say 'Mobile' is not recogised as an internal or external command, operable program or batch fule
+
+C:\projects\opal-patronage-analysis>venv\Scripts\activate			#activates python environment
+
+(venv) projects\opal-patronage-analysis>python src \clean_data.py		#Runs code to clean Opal data in python
+using script under src folder
+
+
+
+(venv) projects\opal-patronage-analysis>jupyter lab			#Runs Jupyter notebook and gives token to login

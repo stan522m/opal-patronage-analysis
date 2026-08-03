@@ -1,0 +1,17 @@
+import pandas as pd, sqlite3
+import matplotlib.pyplot as plt
+conn = sqlite3.connect("data/opal.db")
+monthly = pd.read_sql('''
+  SELECT year, month, mode_name, SUM(trips) AS trips
+  FROM patronage
+  WHERE data_quality_flag = 0 AND is_nsw_total = 1
+  GROUP BY year, month, mode_name''', conn)
+monthly['date'] = pd.to_datetime(
+    dict(year=monthly.year, month=monthly.month, day=1))
+	
+fig, ax = plt.subplots(figsize=(11,6))
+for mode, g in monthly.groupby('mode_name'):
+    ax.plot(g['date'], g['trips'], label=mode)
+ax.set_title("Sydney Opal patronage by mode, 2020 onward")
+ax.set_xlabel("Date");	ax.set_ylabel("Monthly trips");	ax.legend()
+plt.savefig("images/patronage_by_mode.png", dpi=150)

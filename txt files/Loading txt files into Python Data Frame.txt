@@ -1,0 +1,33 @@
+import pandas as pd, glob    #pandas for data manipulation and glob for file searching
+
+files = glob.glob("data/raw/**/*.txt", recursive=True)
+
+def load(f):
+      d = pd.read_csv(f, sep="|")
+      for col in ["Tap_Ons", "Tap_Offs"]:
+          d[col] = pd.to_numeric(d[col].replace("<50", "25"), errors="coerce").fillna(0)
+      return d
+
+  raw = pd.concat((load(f) for f in files), ignore_index=True)
+  raw = pd.concat((load(f) for f in files), ignore_index=True)
+
+  # hourly -> daily; manufacture the 'trips' column the rest of the deck expects
+  df = (raw.groupby(["trip_origin_date", "mode_name", "ti_region"], as_index=False)
+            .agg(trips=("Tap_Ons", "sum"), tap_offs=("Tap_Offs", "sum")))
+
+  print(df.shape); print(df.head()); print(df.dtypes); print(df.isna().sum())
+
+df = pd.concat((pd.read_csv(f, sep="|") for f in files), ignore_index=True)
+
+
+#Shows dimensions of the dataset
+
+print(df.shape)
+
+print(df.head())
+
+print(df.dtypes)
+
+print(df.isna().sum())
+
+df  		#shows what df looks like

@@ -1,0 +1,5 @@
+#   >>>   	#best type and put all command in one line
+# spaces very important in python scripting
+# After June 2024, data shows < 100 so need to factor this
+# for loop syntax, usually has format >>> ....  :
+							        ...		#can put 2nd line here

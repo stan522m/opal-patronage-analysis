@@ -1,0 +1,17 @@
+#Handle the <50 suppression
+
+
+#Below is prototype early code for suppression
+df['suppressed']	=	df['Tap_Ons'].str.strip().eq('<50')
+for	col	in	['Tap_Ons',	'Tap_Offs']:
+df[col]	=	(df[col].str.strip()
+.replace('<50',	'25')
+.astype(int))
+
+ sup = {'<50': '25', '<100': '50'}   # midpoints of the hidden ranges
+df['suppressed'] = df['Tap_Ons'].str.strip().isin(sup)
+
+# type ""df, shows the columns and headings including new column "suppressed"
+
+for col in ['Tap_Ons', 'Tap_Offs']:
+...         df[col] = df[col].str.strip().replace(sup).astype(int)            #Replaces <50 and <100 with integers 25 and 50

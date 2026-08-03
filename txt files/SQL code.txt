@@ -1,0 +1,1 @@
+SELECT ti_region, mode_name, trips, year, month from patronage limit 100
